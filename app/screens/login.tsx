@@ -1,88 +1,59 @@
-import {View, Text, TextInput, StyleSheet, Button, Image} from 'react-native'
+import { TextInput } from 'react-native'
+import { View, Text } from 'react-native-ui-lib';
+import { Button } from '../context/Button';
 import { useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAuth } from '../context/AuthContext';
+import { loginSS } from '../styles';
 
-const Login = () =>{
-    console.log("Rendering Login");
+const Login = () => {
+    //console.log("Rendering Login");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const {onLogin, onRegister} = useAuth();
+    const { onLogin, onRegister } = useAuth();
 
     const login = async () => {
         //console.log(email, password);
-        const result = await onLogin!(email,password);
+        const result = await onLogin!(email, password);
 
         //console.log(result.data);
         //console.log(email, password);
-        if(result && result.error){
-            alert("Unable to Login"); 
+        if (result && result.error) {
+            alert("Unable to Login");
         }
     }
     const register = async () => {
         //console.log(email, password);
-        const result = await onRegister!(email,password);
-        
+        const result = await onRegister!(email, password);
 
 
-        if(result && result.error){
+
+        if (result && result.error) {
             alert("Unable to Register");
-        }else{
+        } else {
             login();
         }
     }
 
-    return(
-    <View style = {ss.Container}>
-        <View style = {{alignItems: 'center'}}>
-        <Ionicons name="barbell" size={70} color="black" />
-        <Text style={ss.titleText}>Login</Text>
+    return (
+        <View style={loginSS.Container}>
+            <View style={{ alignItems: 'center' }}>
+                <Ionicons name="barbell" size={70} color="black" />
+                <Text style={loginSS.titleText}>Login</Text>
+            </View>
+            <View style={loginSS.subContainer}>
+                <TextInput style={loginSS.textInput} placeholder='Email' autoCapitalize='none' keyboardType='email-address' onChangeText={(text) => { setEmail(text) }} />
+                <TextInput style={loginSS.textInput} placeholder='Password' autoCapitalize='none' onChangeText={(text) => { setPassword(text) }} secureTextEntry />
+                <Button text="Login" onPress={login} />
+                <Button text="Register" onPress={register} />
+            </View>
+
         </View>
-        <View style = {ss.subContainer}>
-        <TextInput style={ss.textInput} placeholder='Email' autoCapitalize='none' keyboardType='email-address' onChangeText={(text)=>{setEmail(text)}}/>
-        <TextInput style={ss.textInput} placeholder='Password' autoCapitalize='none' onChangeText={(text)=>{setPassword(text)}} secureTextEntry/>
-        <Button title= "Login" onPress={login}/>
-        <Button title= "Register" onPress={register}/>
-        </View>
-        
-    </View>
     );
 }
 
-const ss = StyleSheet.create({
-    Container:{
-        backgroundColor: "#ffffff",
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%'
 
-    }, 
-    subContainer:{
-        backgroundColor: "#ffffff",
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 7,
-        width: '100%',
-        height: 'auto'
-    },
-    titleText:{
-        fontSize: 24,
-        fontWeight: 'bold',
-        paddingTop: 20,
-        marginBottom: 20
-    }, 
-    textInput:{
-        width: '70%',
-        height: 40,
-        alignSelf: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        borderBlockColor: '#000000',
-        borderWidth: 3
-    }
-});
 
 export default Login;

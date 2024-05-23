@@ -1,4 +1,4 @@
-import { Children, createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import axios from 'axios';
 
@@ -31,7 +31,7 @@ export const AuthProvider = ({children}: any) => {
 
             if(token){
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                console.log(token)
+                //console.log(token)
 
                 setAuthState({
                     token: token,
