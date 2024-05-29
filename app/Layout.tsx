@@ -5,6 +5,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { Button, HeaderButton } from './context/Button';
 import { Display } from './modal/workoutDisplay';
+import { Register } from './screens/fbLogin';
+import { TouchableOpacity, Text } from 'react-native';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebaseConfig';
 
 
 const stack = createNativeStackNavigator();
@@ -15,12 +19,8 @@ export const Layout = () => {
     return(
       <NavigationContainer ref={stackRef}>
         <stack.Navigator>
-          {authState?.authenticated ? (
-            <stack.Screen name = 'Home' component={Home}options={{headerRight: ()=>{return <HeaderButton onPress={onLogout} text='Sign Out'/>}, headerTitle:''}}></stack.Screen>
-          ) : (
-              <stack.Screen name='Login' component={Login} options={{headerShown: false}}></stack.Screen>
-          )
-          }
+          <stack.Screen name='Login' component={Register} options={{headerShown: false}}/>
+          <stack.Screen name='home' component={Home} options={{headerRight:()=>{return(<TouchableOpacity style={{backgroundColor: '#7a35db', borderRadius: 7.5}} onPress={()=>{signOut(auth); navigate('Login', null);}}><Text style={{color:'white', padding:5}}>Sign Out</Text></TouchableOpacity>)}}}/>
           <stack.Group screenOptions={{presentation : 'modal'}}>
             <stack.Screen name="Workout" component={Display}/>
           </stack.Group>
