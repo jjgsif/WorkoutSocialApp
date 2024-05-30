@@ -1,6 +1,6 @@
 import { TextInput } from 'react-native'
 import { View, Text } from 'react-native-ui-lib';
-import { Button } from '../context/Button';
+import { Button } from '../utils/Button';
 import { useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAuth } from '../context/AuthContext';

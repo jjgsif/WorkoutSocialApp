@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
-import { Button } from '../context/Button';
+import { Button } from '../utils/Button';
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 //import Ionicons from '@expo/vector-icons/Ionicons';

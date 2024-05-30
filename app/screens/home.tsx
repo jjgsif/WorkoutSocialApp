@@ -3,8 +3,8 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //import { createNavigationContainerRef } from '@react-navigation/native';
-import Activity from "../tabs/Activity"
-import { Builder } from '../tabs/WorkoutBuilder';
+import {Activity} from "../tabs (firebase)/Activity"
+import { Builder } from '../tabs (Rails)/WorkoutBuilder';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
@@ -22,6 +22,17 @@ const Home = ({ navigation }: any) =>{
     );
 }
 
+const HomeFb = ({navigation}: any) => {
+    return(
+        <NavigationContainer independent={true}>
+            <Tab.Navigator>
+                <Tab.Screen name='Home' component={Activity}  options={{ headerShown: false , tabBarIcon: (focused)=>{/*console.log(focused)*/; return (focused.focused? <Ionicons name='book' color={"blue"}/> : <Ionicons name= 'book-outline'/>)}}}/>
+                <Tab.Screen name='Workouts' component={()=>{return(<View></View>)}}  options={{ headerShown: false, tabBarIcon: (obj)=>{return obj.focused ? <Ionicons name="pencil" color={"blue"}/> : <Ionicons name="pencil-outline" /> } }}/>
+            </Tab.Navigator>
+        </NavigationContainer>
+    )
+}
+
 export const Test = () =>{
     return (
         <View>
@@ -32,4 +43,4 @@ export const Test = () =>{
 
 
 
-export default Home;
+export {Home, HomeFb};
