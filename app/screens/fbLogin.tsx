@@ -5,7 +5,7 @@ import {loginSS} from '../styles';
 import { View, Text, TextField} from 'react-native-ui-lib';
 
 import { useState, useEffect } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { TouchableOpacity } from 'react-native';
 import { Button } from '../utils/Button';
 
@@ -18,6 +18,7 @@ export const Register = ({ navigation }: any) => {
     const registerUser = async () => {
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(response.user, {displayName: 'John Sifuentes'})
             alert(response.user.email + ' is logged in!')
             
         } catch (error) {
@@ -29,6 +30,7 @@ export const Register = ({ navigation }: any) => {
     const loginUser = async () => {
         try {
             const response = await signInWithEmailAndPassword(auth,email,password);
+            await updateProfile(response.user, {displayName: 'John Sifuentes'})
             alert(response.user.email + ' is logged in!')
             
         }catch (error) {

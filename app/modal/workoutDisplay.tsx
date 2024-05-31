@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 //@ts-ignore
 export function Display({route, navigation}){
     const data = route.params;
-    console.log(JSON.parse(data.set).data)
+    route.name = data.name + " on " + data.date;
+    
     //console.log(data);
 
     return(<View>
-        <Text>{JSON.parse(JSON.parse(data.set).data[0]).exerciseName}</Text>
+        <Text>{JSON.stringify(data)}</Text>
     </View>)
 }

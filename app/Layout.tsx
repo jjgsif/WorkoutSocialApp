@@ -22,7 +22,7 @@ export const Layout = () => {
       <NavigationContainer ref={stackRef} >
         <stack.Navigator>
           {user != null ? 
-            (<stack.Screen name='Home' component={HomeFb} options={{headerRight: ()=>{return (<TouchableOpacity onPress={()=>signOut(auth)}><Text>Sign Out</Text></TouchableOpacity>)}}}/>) : 
+            (<stack.Screen name='Home' component={HomeFb} options={{headerRight: ()=>{return (<TouchableOpacity onPress={()=>signOut(auth)}><Text>Sign Out</Text></TouchableOpacity>)}, headerTitle: ""+auth.currentUser?.displayName}}/>) : 
             (<stack.Screen name='Login' component={Register} options={{headerShown: false}} />)
           }
           <stack.Group screenOptions={{presentation : 'modal'}}>
